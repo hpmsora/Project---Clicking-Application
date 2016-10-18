@@ -111,6 +111,18 @@ class FirstViewController: UIViewController {
         
         btn_Score.setTitle(String(number), forState: .Normal)
         
+        let rateNumNS = stringKey.stringForKey("savedRateNum")
+        var rate = 0
+        if rateNumNS != nil {
+            rate = Int(rateNumNS!)!
+        } else {
+            rate = 0
+        }
+        NSUserDefaults.standardUserDefaults().setObject(String(addingNum), forKey: "savedAddingNum")
+        NSUserDefaults.standardUserDefaults().setObject(String(rate), forKey: "savedRateNum")
+        NSUserDefaults.standardUserDefaults().setObject(String(number), forKey: "savedCount")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
         timer = NSTimer(timeInterval: 1.0, target: self, selector: "update", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
     }

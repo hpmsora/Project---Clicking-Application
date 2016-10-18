@@ -178,6 +178,12 @@ class SecondViewController: UIViewController {
         if addingNumNS != nil {
             addingNum = Int(addingNumNS!)!
         }
+        let num = stringKey.stringForKey("savedCount")
+        var number = 0
+        
+        if num != "" {
+            number = Int(num!)!
+        }
         let rateNumNS = stringKey.stringForKey("savedRateNum")
         var rate = 0
         if rateNumNS != nil {
@@ -185,6 +191,10 @@ class SecondViewController: UIViewController {
         } else {
             rate = 0
         }
+        NSUserDefaults.standardUserDefaults().setObject(String(addingNum), forKey: "savedAddingNum")
+        NSUserDefaults.standardUserDefaults().setObject(String(rate), forKey: "savedRateNum")
+        NSUserDefaults.standardUserDefaults().setObject(String(number), forKey: "savedCount")
+        NSUserDefaults.standardUserDefaults().synchronize()
         
         rateTextBox.text = "One Click for " + String(addingNum) + " & " + String(rate) + " Click per Second"
     }
